@@ -1,0 +1,125 @@
+#set( $root = $springMacroRequestContext.getContextPath() )
+#set( $listpath = $root +"/gbox/list.do" )
+<div class="panel panel-default">
+	<div class="panel-heading">
+		共搜索到视频记录：$!totalHits 条
+    </div>
+    <div class="panel-body">
+		<div class="row">
+        	#foreach( $videoInfo in $videoInfoList )
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="$!videoInfo.vThumbnail" alt="$!videoInfo.vThumbnail">
+                        <div class="caption">
+                            <p>
+								$!videoInfo.vName
+								<br/>
+								$!videoInfo.vComment
+							</p>
+                            <p>
+                                <a class="btn btn-primary" href="$root/gbox/play.do?nginxAddr=$!videoInfo.vNginxAddr&videoname=$!videoInfo.vName" role="button">Play</a>
+                            </p>
+                        </div>
+                    </div>
+				</div>
+        	#end	
+        </div>
+		#if( $totalHits )
+			#set( $tempPage = $totalHits/$pageSize )
+			#if( $totalHits == $tempPage*$pageSize )
+        		#set( $totalPages =  $tempPage )
+			#else	
+				#set( $totalPages =  $totalHits/$pageSize + 1 )
+			#end	
+    		<div id="videolist_pagination"> 
+                <nav>
+                  <ul class="pagination">
+                    <li>
+					  #if( $pageNum == 1 )
+						<a href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					  #else	
+						#set( $prePageNum = $pageNum - 1 )
+						#set( $href = $listpath + "?pageNum=$prePageNum&pageSize=$pageSize&vIDs=$!vIDs.toString()" )
+                        <a href="$href">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+					  #end	
+                    </li>
+					#if( $totalPages <= 5 )
+                		#foreach( $page in [1..$totalPages] )
+							#if( $page == $pageNum )
+								<li class="active"><a href="#" >$page</a></li>
+							#else	
+    							#set( $href = $listpath + "?pageNum=$page&pageSize=$pageSize&vIDs=$!vIDs.toString()" )
+    							<li><a href="$href">$page</a></li>
+							#end	
+						#end
+					#else
+						#if( $pageNum <= 5 )
+							#foreach( $page in [1..5] )
+								#if( $page == $pageNum )
+    								<li class="active"><a href="#" >$page</a></li>
+    							#else	
+        							#set( $href = $listpath + "?pageNum=$page&pageSize=$pageSize&vIDs=$!vIDs.toString()" )
+        							<li><a href="$href">$page</a></li>
+    							#end
+							#end
+						#else
+							#set( $range = (($pageNum / 5) * 5) )
+							#set( $rStart = $range + 1 )
+							#set( $rEnd = $range + 5 )
+							#if( $pageNum < $rStart )
+								#set( $end = $range - 4 )
+								#foreach( $page in [$end..$range] )
+									#if( $page == $pageNum )
+        								<li class="active"><a href="#" >$page</a></li>
+        							#else	
+            							#set( $href = $listpath + "?pageNum=$page&pageSize=$pageSize&vIDs=$!vIDs.toString()" )
+            							<li><a href="$href">$page</a></li>
+        							#end
+								#end
+							#else
+								#if( $rEnd > $totalPages )
+									#foreach( $page in [$rStart..$totalPages] )
+										#if( $page == $pageNum )
+            								<li class="active"><a href="#" >$page</a></li>
+            							#else	
+                							#set( $href = $listpath + "?pageNum=$page&pageSize=$pageSize&vIDs=$!vIDs.toString()" )
+                							<li><a href="$href">$page</a></li>
+            							#end
+									#end
+								#else
+									#foreach( $page in [$rStart..$rEnd] )
+            							#if( $page == $pageNum )
+            								<li class="active"><a href="#" >$page</a></li>
+            							#else	
+                							#set( $href = $listpath + "?pageNum=$page&pageSize=$pageSize&vIDs=$!vIDs.toString()" )
+                							<li><a href="$href">$page</a></li>
+            							#end
+									#end
+								#end
+							#end	
+						#end	
+					#end
+                    <li>
+					  #if( $pageNum == $totalPages )
+                          <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+					  #else
+							#set( $nextPageNum = $pageNum + 1 )
+							#set( $href = $listpath + "?pageNum=$nextPageNum&pageSize=$pageSize&vIDs=$!vIDs.toString()" )
+                            <a href="$href">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+					  #end	
+                    </li>
+                  </ul>
+                </nav>
+			</div>
+		#end
+	</div>
+    </div>
+</div>

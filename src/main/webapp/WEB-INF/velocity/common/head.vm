@@ -1,0 +1,21 @@
+ #set($root=$springMacroRequestContext.getContextPath())   
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>gBox</title>
+    <link href="$root/css/bootstrap.min.css" rel="stylesheet">
+    <link href="$root/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="$root/css/theme.css" rel="stylesheet">
+    <link href="$root/css/jquery.validate.css" rel="stylesheet">
+	<link href="$root/css/buttons.css" rel="stylesheet">
+		
+	<script src="$root/js/jquery-1.10.2.min.js"></script>
+	<script src="$root/js/jquery.validate.min.js"></script>
+	<script src="$root/js/jquery.validate.message_cn.js"></script>
+	<script src="$root/js/bootstrap-paginator.js"></script>
+	<script src="$root/js/datademo.js"></script>
+	<script type="text/javascript" src="$root/js/jwplayer.js"></script>
+	<script type="text/javascript" src="$root/js/jwplayer.js"></script>
+

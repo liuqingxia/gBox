@@ -1,0 +1,27 @@
+#set($layout = "/layout/mainLayout.vm")
+#set($root=$springMacroRequestContext.getContextPath())
+<div class="panel panel-default">
+  <div class="panel-heading">
+	正在播放：$!videoName
+  </div>
+  <div class="panel-body">
+    <div id="play_player">
+
+	</div>
+  </div>
+</div>
+
+<script type="text/javascript"> 
+jwplayer("play_player").setup({ 
+flashplayer: "$root/players/player.swf", 
+file: "http://123.56.168.49:80/liyizhizheng.flv",
+height: 480, 
+width: 720
+}); 
+</script>
+
+
+
+
+
+

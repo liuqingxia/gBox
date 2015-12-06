@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!ELEMENT SearchConfig (Lucene-Version,Index-Process,Search-Process)>
+<!ELEMENT Lucene-Version (#PCDATA)>
+<!ELEMENT Index-Process (IndexWriter)>
+<!ELEMENT IndexWriter (Index-Dir,Analyzer,CreateNewIndex,MaxFieldLength,Attributes,Document)>
+<!ELEMENT Index-Dir (Path,DirType)>
+<!ELEMENT Path (#PCDATA)>
+<!ELEMENT DirType (#PCDATA)>
+<!ELEMENT Analyzer (AnalyzerType,Version)>
+<!ELEMENT AnalyzerType (#PCDATA)>
+<!ELEMENT Version (#PCDATA)>
+<!ELEMENT CreateNewIndex (#PCDATA)>
+<!ELEMENT MaxFieldLength (#PCDATA)>
+<!ELEMENT Attributes (MergeFactor?,MaxBufferedDocs?,MaxMergeDocs?)>
+<!ELEMENT MergeFactor (#PCDATA)>
+<!ELEMENT MaxMergeDocs (#PCDATA)>
+<!ELEMENT MaxBufferedDocs (#PCDATA)>
+<!ELEMENT Document (BeanType,Fields)>
+<!ELEMENT BeanType (#PCDATA)>
+<!ELEMENT Fields (Field+)>
+<!ELEMENT Field (FieldName,FieldPolicy)>
+<!ATTLIST Field
+	id CDATA #REQUIRED
+	over CDATA #REQUIRED
+> 
+<!ELEMENT FieldName (#PCDATA)>
+<!ELEMENT FieldPolicy (StorePolicy,IndexPolicy)>
+<!ELEMENT IndexPolicy (#PCDATA)>
+<!ELEMENT StorePolicy (#PCDATA)>
+<!ELEMENT Search-Process (#PCDATA)>
