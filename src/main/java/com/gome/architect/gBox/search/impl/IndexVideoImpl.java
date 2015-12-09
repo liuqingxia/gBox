@@ -2,21 +2,21 @@ package com.gome.architect.gBox.search.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
 import com.gome.architect.gBox.pojos.Video;
 import com.gome.architect.gBox.pojos.VideoField;
 import com.gome.architect.gBox.search.utils.Constants;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import org.springframework.stereotype.Component;
 import com.gome.architect.gBox.search.IndexVideo;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
 @Component
 public class IndexVideoImpl implements IndexVideo {
@@ -27,14 +27,16 @@ public class IndexVideoImpl implements IndexVideo {
 	public void index(Video v) {
         Directory indexDir = null;
         try {
-            indexDir = FSDirectory.open(new File(indexDirStr));
+            File f = new File(indexDirStr);
+            indexDir = FSDirectory.open(f);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
+        Analyzer analyzer = new IKAnalyzer();
         IndexWriter iWriter = null;
         try {
-            iWriter = new IndexWriter(indexDir, analyzer, false, IndexWriter.MaxFieldLength.UNLIMITED);
+            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41,analyzer);
+            iWriter = new IndexWriter(indexDir, config);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +48,6 @@ public class IndexVideoImpl implements IndexVideo {
             doc.add(new Field(VideoField.playAddr,v.getPlayAddr(),Field.Store.YES,Field.Index.NOT_ANALYZED));
             doc.add(new Field(VideoField.screenShotAddr,v.getScreenShotAddr(),Field.Store.YES,Field.Index.NOT_ANALYZED));
 			iWriter.addDocument(doc);
-			iWriter.optimize();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
@@ -59,6 +60,21 @@ public class IndexVideoImpl implements IndexVideo {
 					e.printStackTrace();
 				}
 		}
-	
 	}
+
+    /**
+     * 判断给定目录是否为空
+     * @return
+     */
+    public boolean isEmptyDir(File f){
+        if ( f.isDirectory() ) {
+            String[] files = f.list();
+            if ( files.length > 0 ) {
+                return false;
+            }
+        }else {
+            throw new IllegalArgumentException("The file is not a directory");
+        }
+        return true;
+    }
 }

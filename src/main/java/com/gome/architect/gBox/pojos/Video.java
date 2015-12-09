@@ -59,8 +59,7 @@ public class Video implements Serializable{
     @Override
     public String toString() {
         return "Video{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", introduce='" + introduce + '\'' +
                 ", lecturer='" + lecturer + '\'' +
                 ", playAddr='" + playAddr + '\'' +
