@@ -10,7 +10,6 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
@@ -25,18 +24,19 @@ public class IndexVideoImpl implements IndexVideo {
 
     @Override
 	public void index(Video v) {
+        File f = null;
         Directory indexDir = null;
         try {
-            File f = new File(indexDirStr);
+            f = new File(indexDirStr);
             indexDir = FSDirectory.open(f);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        boolean isCreated = isEmptyDir(f) ? true : false;
         Analyzer analyzer = new IKAnalyzer();
         IndexWriter iWriter = null;
         try {
-            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41,analyzer);
-            iWriter = new IndexWriter(indexDir, config);
+            iWriter = new IndexWriter(indexDir, analyzer,isCreated, IndexWriter.MaxFieldLength.UNLIMITED);
         } catch (IOException e) {
             e.printStackTrace();
         }

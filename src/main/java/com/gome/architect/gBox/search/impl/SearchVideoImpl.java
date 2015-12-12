@@ -11,13 +11,16 @@ import com.gome.architect.gBox.search.utils.Constants;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
-import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.queryParser.MultiFieldQueryParser;
+import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.Version;
 import org.springframework.stereotype.Component;
 import org.wltea.analyzer.lucene.IKAnalyzer;
+
 
 
 @Component
@@ -25,6 +28,9 @@ public class SearchVideoImpl implements SearchVideo {
 
 	private String indexDirStr = Constants.indexDir;
 	private Analyzer analyzer = new IKAnalyzer();
+    private String[] fields = new String[]{VideoField.name,VideoField.lecturer,VideoField.introduce};
+    private BooleanClause.Occur[] clauses = new BooleanClause.Occur[]{
+            BooleanClause.Occur.SHOULD,BooleanClause.Occur.SHOULD,BooleanClause.Occur.SHOULD};
 	
 	public SearchVideoImpl() { }
 
@@ -36,20 +42,22 @@ public class SearchVideoImpl implements SearchVideo {
             e.printStackTrace();
         }
         IndexSearcher indexSearcher = null;
-        DirectoryReader indexReader = null;
         try {
-            indexReader = DirectoryReader.open(indexDir);
+            indexSearcher = new IndexSearcher(indexDir,true);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        indexSearcher = new IndexSearcher(indexReader);
-        BooleanQuery query = new BooleanQuery();
-        query.add(new TermQuery(new Term(VideoField.name,keywords)), BooleanClause.Occur.SHOULD);
-        query.add(new TermQuery(new Term(VideoField.introduce,keywords)),BooleanClause.Occur.SHOULD);
-        query.add(new TermQuery(new Term(VideoField.lecturer,keywords)),BooleanClause.Occur.SHOULD);
+        Query multiFieldQuery = null;
+        try {
+            multiFieldQuery = MultiFieldQueryParser.parse(
+                    Version.LUCENE_30, keywords, fields, clauses,
+                    analyzer);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         TopScoreDocCollector collector = TopScoreDocCollector.create(100, false);
         try {
-            indexSearcher.search(query, collector);
+            indexSearcher.search(multiFieldQuery, collector);
         } catch (IOException e) {
             e.printStackTrace();
         }

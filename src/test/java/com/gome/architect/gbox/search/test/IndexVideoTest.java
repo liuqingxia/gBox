@@ -22,4 +22,9 @@ public class IndexVideoTest {
 
         indexVideo.index(v);
     }
+
+    public static void main(String[] args){
+        IndexVideoTest test = new IndexVideoTest();
+        test.indexTest();
+    }
 }

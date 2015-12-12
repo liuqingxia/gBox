@@ -15,7 +15,7 @@ public class SearchVideoTest {
 
     @Test
     public void searchTest(){
-        String keywords = "海";
+        String keywords = "索隆";
         List<Video> videos = searchVideo.search(keywords);
         if ( null != videos && 0 != videos.size() ){
             for ( Video v : videos ){
