@@ -1,4 +1,4 @@
-package com.gome.architect.gBox.dao.utils;
+package com.gome.architect.gbox.utils;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -21,4 +21,7 @@ public class Constants {
 
     /****** 索引文件所在目录 *******/
     public static final String indexDir = searchProps.getProperty("indexDir");
+
+    /***********最新视频列表的默认大小***************/
+    public static final int VideoListSize = 10;
 }
