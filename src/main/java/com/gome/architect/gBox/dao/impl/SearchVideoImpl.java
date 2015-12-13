@@ -31,6 +31,8 @@ public class SearchVideoImpl implements SearchVideo {
 	
 	public SearchVideoImpl() { }
 
+    @Override
+    @SuppressWarnings("deprecation")
 	public List<Video> search(String keywords) {
         Directory indexDir = null;
         try {
