@@ -1,8 +1,8 @@
 package com.gome.architect.gbox.search.test;
 
 import com.gome.architect.gBox.pojos.Video;
-import com.gome.architect.gBox.search.SearchVideo;
-import com.gome.architect.gBox.search.impl.SearchVideoImpl;
+import com.gome.architect.gBox.dao.SearchVideo;
+import com.gome.architect.gBox.dao.impl.SearchVideoImpl;
 import org.junit.Test;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.gome.architect.gbox.search.test;
 
 import com.gome.architect.gBox.pojos.Video;
-import com.gome.architect.gBox.search.IndexVideo;
-import com.gome.architect.gBox.search.impl.IndexVideoImpl;
+import com.gome.architect.gBox.dao.IndexVideo;
+import com.gome.architect.gBox.dao.impl.IndexVideoImpl;
 import org.junit.Test;
 
 /**
@@ -19,7 +19,6 @@ public class IndexVideoTest {
         v.setLecturer("尾田");
         v.setPlayAddr("http://123.56.168:80/haizeiwang_719.flv");
         v.setScreenShotAddr("http://123.56.168:80/haizeiwang_719.flv");
-
         indexVideo.index(v);
     }
 

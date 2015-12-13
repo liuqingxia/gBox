@@ -1,4 +1,4 @@
-package com.gome.architect.gBox.search;
+package com.gome.architect.gBox.dao;
 
 import com.gome.architect.gBox.pojos.Video;
 import java.util.List;

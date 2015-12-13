@@ -9,8 +9,6 @@
     http://www.springframework.org/schema/context   
     http://www.springframework.org/schema/context/spring-context-3.0.xsd
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-
-	<!--<import resource="gBoxDatasource.xml" />-->
     
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.gome.architect.gBox" />
@@ -24,7 +22,7 @@
 		</property>
 	</bean>
 
-<bean name="mappingJacksonHttpMessageConverter"
+    <bean name="mappingJacksonHttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" /> 
 
 	<!-- velocity view Resolver -->
@@ -104,16 +102,5 @@
 			</props>
 		</property>
 	</bean>
-
-	<bean id="springSecurityFilterChain" class="org.springframework.security.web.csrf.CsrfFilter">
-		<constructor-arg>
-			<bean
-				class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository" />
-		</constructor-arg>
-	</bean>
-	<!-- Provides automatic CSRF token inclusion when using Spring MVC Form 
-		tags or Thymeleaf. -->
-	<bean id="requestDataValueProcessor"
-		class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor" />
 		   
 </beans>

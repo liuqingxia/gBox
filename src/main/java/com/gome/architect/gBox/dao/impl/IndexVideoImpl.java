@@ -1,10 +1,10 @@
-package com.gome.architect.gBox.search.impl;
+package com.gome.architect.gBox.dao.impl;
 
 import java.io.File;
 import java.io.IOException;
 import com.gome.architect.gBox.pojos.Video;
 import com.gome.architect.gBox.pojos.VideoField;
-import com.gome.architect.gBox.search.utils.Constants;
+import com.gome.architect.gBox.dao.utils.Constants;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -12,17 +12,16 @@ import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.util.Version;
-import org.springframework.stereotype.Component;
-import com.gome.architect.gBox.search.IndexVideo;
+import com.gome.architect.gBox.dao.IndexVideo;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
-@Component
+
 public class IndexVideoImpl implements IndexVideo {
 
 	private String indexDirStr = Constants.indexDir;
 
     @Override
+    @SuppressWarnings("deprecation")
 	public void index(Video v) {
         File f = null;
         Directory indexDir = null;
@@ -47,6 +46,7 @@ public class IndexVideoImpl implements IndexVideo {
             doc.add(new Field(VideoField.lecturer,v.getLecturer(),Field.Store.YES,Field.Index.NOT_ANALYZED));
             doc.add(new Field(VideoField.playAddr,v.getPlayAddr(),Field.Store.YES,Field.Index.NOT_ANALYZED));
             doc.add(new Field(VideoField.screenShotAddr,v.getScreenShotAddr(),Field.Store.YES,Field.Index.NOT_ANALYZED));
+            doc.add(new Field(VideoField.createTime,v.getCreateTime(),Field.Store.YES,Field.Index.NOT_ANALYZED));
 			iWriter.addDocument(doc);
 		} catch (Exception e) {
 			e.printStackTrace();

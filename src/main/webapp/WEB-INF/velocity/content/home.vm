@@ -1,4 +1,47 @@
-#set($layout = "/layout/mainLayout.vm")
 #set($root=$springMacroRequestContext.getContextPath())
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    #set($root=$springMacroRequestContext.getContextPath())
+    #parse("common/head.vm")
+    <style>
+        #home_form_id{
+            margin-top: 2%;
+        }
+    </style>
+</head>
+<body class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div id="home_form_id">
+                        <form method="get" action="$root/gbox/list.do">
+                            <div class="input-group">
+                                <input class="form-control" type="text" id="querykey" name="querykey" placeholder="请输入关键词 ...">
+                                    <span class="input-group-btn">
+                                        <button type="submit" id="querybutton" class="btn btn-info">查找视频</button>
+                                    </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">最新培训视频</div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+
+    </div>
+    #parse("common/js.vm")
+</body>
+</html>
+
 
 

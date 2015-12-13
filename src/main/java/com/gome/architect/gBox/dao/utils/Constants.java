@@ -1,4 +1,4 @@
-package com.gome.architect.gBox.search.utils;
+package com.gome.architect.gBox.dao.utils;
 
 import java.io.IOException;
 import java.util.Properties;

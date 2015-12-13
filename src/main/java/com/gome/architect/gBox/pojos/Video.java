@@ -3,17 +3,24 @@ package com.gome.architect.gBox.pojos;
 
 import java.io.Serializable;
 
-public class Video implements Serializable{
-
-    private static final long serialVersionUID = 1L;
+public class Video {
 
     private String name;//视频名称
     private String introduce;//视频介绍
     private String lecturer;//讲师
     private String playAddr;//播放地址
     private String screenShotAddr;//截图地址
+    private String createTime;//创建时间
 
     public Video() {
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getName() {
@@ -64,6 +71,7 @@ public class Video implements Serializable{
                 ", lecturer='" + lecturer + '\'' +
                 ", playAddr='" + playAddr + '\'' +
                 ", screenShotAddr='" + screenShotAddr + '\'' +
+                ", createTime='" + createTime + '\'' +
                 '}';
     }
 }

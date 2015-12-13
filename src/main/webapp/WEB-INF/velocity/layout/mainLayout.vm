@@ -8,10 +8,11 @@
             padding-top: 50px;
         }
 		#home_form_id{
-			margin-top: 4%;
+			margin-top: 2%;
 		} 
 		#home_abutton_id{
-			margin-top: 13%;
+			margin-top: 5%;
+            margin-bottom: 5%;
 		}
 		#play_player{
 			margin-left: 25%;
@@ -26,51 +27,24 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
         	<div class="row">
-        		<div class="col-md-3">
-            		<span style="font-size:50px;FONT-FAMILY:STKaiti">
-            			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="E066FF">gBoX</font><font color="EE6363">xx</font>
-                    </span>		
-                </div>
+                <div class="col-md-3"></div>
         		<div class="col-md-6">
         			<div id="home_form_id">
                         <form method="get" action="$root/gbox/list.do">
                         	<div class="input-group">
                                 <input class="form-control" type="text" id="querykey" name="querykey" placeholder="请输入关键词 ...">
                                 <span class="input-group-btn">
-                                    <button type="submit" id="querybutton" class="btn btn-info">Search BoX!</button>
+                                    <button type="submit" id="querybutton" class="btn btn-info">查找视频</button>
                                 </span>	
                             </div>
                         </form>
                     </div>
                 </div>
-        		<div class="col-md-1">
-        			&nbsp;&nbsp;&nbsp;
-                </div>
-        		<div class="col-md-2">
-        			<div id="home_abutton_id">
-            			<a class="btn btn-default" href="$root/gbox/upload.do">
-            				上传视频
-                        </a>
-                    </div>
-                </div>	
             </div>
         </div>
     </nav>
 	<br>
 	<div class="container">
-    	<ul class="nav nav-pills">
-          <li class="bg-danger"><a href="$root/gbox/link.do?type=index">首页</a></li>
-          <li class="bg-success"><a href="$root/gbox/link.do?type=circle">互联网圈子</a></li>
-		  <li class="bg-success"><a href="$root/gbox/link.do?type=news">GOME动态</a></li>
-		  <li class="bg-success"><a href="$root/gbox/link.do?type=lecture">GOME大牛讲堂</a></li>
-          <li class="bg-success"><a href="$root/gbox/link.do?type=java">技术&Java</a></li>
-		  <li class="bg-success"><a href="$root/gbox/link.do?type=front">前端构建</a></li>
-		  <li class="bg-success"><a href="$root/gbox/link.do?type=back">后台支持</a></li>
-		  <li class="bg-success"><a href="$root/gbox/link.do?type=linux">运维&Linux</a></li>
-		  <li class="bg-success"><a href="$root/gbox/link.do?type=bigdata">大数据（Hadoop）</a></li>
-		  <li class="bg-success"><a href="$root/gbox/link.do?type=cloud">云平台/计算</a></li>
-		  <li class="bg-success"><a href="$root/gbox/link.do?type=welfare">宅男福利区</a></li>
-    	</ul>
 		<br>
 		$screen_content
     </div>

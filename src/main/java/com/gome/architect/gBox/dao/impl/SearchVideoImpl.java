@@ -1,4 +1,4 @@
-package com.gome.architect.gBox.search.impl;
+package com.gome.architect.gBox.dao.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,24 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 import com.gome.architect.gBox.pojos.Video;
 import com.gome.architect.gBox.pojos.VideoField;
-import com.gome.architect.gBox.search.SearchVideo;
-import com.gome.architect.gBox.search.utils.Constants;
+import com.gome.architect.gBox.dao.SearchVideo;
+import com.gome.architect.gBox.dao.utils.Constants;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
-import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
-import org.springframework.stereotype.Component;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 
 
-@Component
 public class SearchVideoImpl implements SearchVideo {
 
 	private String indexDirStr = Constants.indexDir;
@@ -68,11 +65,12 @@ public class SearchVideoImpl implements SearchVideo {
             Video v = new Video();
 			try {
 				Document d = indexSearcher.doc(doc.doc);
-                v.setName(d.getField(VideoField.name).stringValue());
-                v.setIntroduce(d.getField(VideoField.introduce).stringValue());
-                v.setLecturer(d.getField(VideoField.lecturer).stringValue());
-                v.setPlayAddr(d.getField(VideoField.playAddr).stringValue());
-                v.setScreenShotAddr(d.getField(VideoField.screenShotAddr).stringValue());
+                v.setName(d.getFieldable(VideoField.name).stringValue());
+                v.setIntroduce(d.getFieldable(VideoField.introduce).stringValue());
+                v.setLecturer(d.getFieldable(VideoField.lecturer).stringValue());
+                v.setPlayAddr(d.getFieldable(VideoField.playAddr).stringValue());
+                v.setScreenShotAddr(d.getFieldable(VideoField.screenShotAddr).stringValue());
+                v.setCreateTime(d.getFieldable(VideoField.createTime).stringValue());
                 videos.add(v);
 			} catch (CorruptIndexException e) {
 				e.printStackTrace();
